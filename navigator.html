@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilingual Job Dashboard | バイリンガル求職ダッシュボード</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button id="lang-en" class="lang-btn active" data-lang="en">
+            <img src="assets/flags/us-flag.png" alt="US Flag" class="flag-icon">
+            English
+        </button>
+        <button id="lang-ja" class="lang-btn" data-lang="ja">
+            <img src="assets/flags/jp-flag.png" alt="Japan Flag" class="flag-icon">
+            日本語
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title" data-en="Bilingual Job Dashboard" data-ja="バイリンガル求職ダッシュボード"></h1>
+            <p class="subtitle" data-en="Navigate Japanese and American job markets" data-ja="日本とアメリカの求職市場をナビゲート"></p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Stats Dashboard -->
+        <section class="dashboard-section">
+            <h2 class="section-title" data-en="Your Job Search Stats" data-ja="あなたの求職統計"></h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="applied-count">0</div>
+                    <div class="stat-label" data-en="Applications" data-ja="応募数"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="interview-count">0</div>
+                    <div class="stat-label" data-en="Interviews" data-ja="面接数"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="response-rate">0%</div>
+                    <div class="stat-label" data-en="Response Rate" data-ja="返信率"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Search -->
+        <section class="dashboard-section">
+            <h2 class="section-title" data-en="Find Jobs" data-ja="求人を探す"></h2>
+            <div class="search-box">
+                <input type="text" id="job-search" class="search-input" 
+                       placeholder="JavaScript, Web Developer, Osaka..." 
+                       data-en-placeholder="JavaScript, Web Developer, Osaka..." 
+                       data-ja-placeholder="JavaScript, Web開発者, 大阪...">
+                <button id="search-btn" class="search-btn" data-en="Search" data-ja="検索"></button>
+            </div>
+            <div class="job-filters">
+                <select id="country-filter" class="filter-select">
+                    <option value="all" data-en="All Countries" data-ja="すべての国">All Countries</option>
+                    <option value="jp" data-en="Japan" data-ja="日本">Japan</option>
+                    <option value="us" data-en="USA" data-ja="アメリカ">USA</option>
+                </select>
+                <select id="job-type-filter" class="filter-select">
+                    <option value="all" data-en="All Types" data-ja="すべての種類">All Types</option>
+                    <option value="frontend" data-en="Frontend" data-ja="フロントエンド">Frontend</option>
+                    <option value="backend" data-en="Backend" data-ja="バックエンド">Backend</option>
+                    <option value="fullstack" data-en="Full Stack" data-ja="フルスタック">Full Stack</option>
+                </select>
+            </div>
+            <div id="job-listings" class="job-listings">
+                <!-- Jobs will be loaded here -->
+                <p class="loading-text" data-en="Loading jobs..." data-ja="求人を読み込み中..."></p>
+            </div>
+        </section>
+
+        <!-- Resume Builder -->
+        <section class="dashboard-section">
+            <h2 class="section-title" data-en="Resume Builder" data-ja="履歴書ビルダー"></h2>
+            <div class="resume-options">
+                <button class="template-btn" data-template="jp" data-en="Japanese Format" data-ja="日本式履歴書">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="btn-text" data-en="Japanese Format" data-ja="日本式履歴書"></span>
+                </button>
+                <button class="template-btn" data-template="us" data-en="US Format" data-ja="アメリカ式履歴書">
+                    <i class="fas fa-file-contract"></i>
+                    <span class="btn-text" data-en="US Format" data-ja="アメリカ式履歴書"></span>
+                </button>
+                <button class="template-btn" data-template="bilingual" data-en="Bilingual Format" data-ja="バイリンガル履歴書">
+                    <i class="fas fa-globe"></i>
+                    <span class="btn-text" data-en="Bilingual Format" data-ja="バイリンガル履歴書"></span>
+                </button>
+            </div>
+            <div id="resume-preview" class="resume-preview">
+                <!-- Resume preview will appear here -->
+                <p data-en="Select a template to preview" data-ja="テンプレートを選択してプレビュー"></p>
+            </div>
+        </section>
+
+        <!-- Interview Practice -->
+        <section class="dashboard-section">
+            <h2 class="section-title" data-en="Interview Practice" data-ja="面接練習"></h2>
+            <div class="interview-controls">
+                <select id="culture-select" class="culture-select">
+                    <option value="jp" data-en="Japanese Style" data-ja="日本式面接">Japanese Style</option>
+                    <option value="us" data-en="US Style" data-ja="アメリカ式面接">US Style</option>
+                    <option value="tech" data-en="Technical" data-ja="技術面接">Technical</option>
+                </select>
+                <button id="new-question-btn" class="action-btn" data-en="New Question" data-ja="新しい質問"></button>
+            </div>
+            <div class="question-card">
+                <div class="question-text" id="current-question" data-en="Click 'New Question' to start practicing" data-ja="「新しい質問」をクリックして練習開始"></div>
+                <div class="question-notes" id="culture-notes"></div>
+                <div class="recording-controls">
+                    <button id="record-btn" class="record-btn" data-en="Record Answer" data-ja="回答を録音">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div id="recording-timer" class="recording-timer">00:00</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cultural Tips -->
+        <section class="dashboard-section">
+            <h2 class="section-title" data-en="Cultural Tips" data-ja="文化の違い"></h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3><i class="fas fa-handshake"></i> <span data-en="Greetings" data-ja="挨拶"></span></h3>
+                    <p data-en="Japanese: Bow, business cards with both hands. US: Firm handshake, eye contact." 
+                       data-ja="日本: お辞儀、名刺は両手で。アメリカ: 力強い握手、アイコンタクト。"></p>
+                </div>
+                <div class="tip-card">
+                    <h3><i class="fas fa-comments"></i> <span data-en="Communication" data-ja="コミュニケーション"></span></h3>
+                    <p data-en="Japanese: Indirect, read between lines. US: Direct, say what you mean." 
+                       data-ja="日本: 間接的、行間を読む。アメリカ: 直接的、思ったことを言う。"></p>
+                </div>
+                <div class="tip-card">
+                    <h3><i class="fas fa-briefcase"></i> <span data-en="Work Style" data-ja="仕事スタイル"></span></h3>
+                    <p data-en="Japanese: Group harmony, consensus. US: Individual initiative, assertiveness." 
+                       data-ja="日本: 和を重んじる、合意形成。アメリカ: 個人の積極性、自己主張。"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-en="Built for bilingual professionals in Osaka" data-ja="大阪のバイリンガル専門家のために作成"></p>
+            <p class="footer-note" data-en="Practice project for WeTec interview preparation" 
+               data-ja="WeTec面接準備のための練習プロジェクト"></p>
+            <div class="tech-stack">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Local Storage</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
